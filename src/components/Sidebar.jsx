@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiMenuUnfoldLine, RiMenuFoldLine, RiListCheck } from "react-icons/ri";
-import { HiUser, HiHome } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
-import { MdDoneAll, MdRemoveDone,MdFormatListBulletedAdd  } from "react-icons/md";
-
+import {
+  MdDoneAll,
+  MdRemoveDone,
+  MdFormatListBulletedAdd,
+} from "react-icons/md";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState("false");
-  // Sidebar Responsive Handler
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  /* Sidebar Responsive Handler */
   const handleToggle = () => {
     setActive(!isActive);
   };
 
+  /* theme toggle handler */
+  const handleThemeToggle = () => {
+    setTheme((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
+
+  /* change theme and store theme data to localStorage */
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    localStorage.setItem("theme",theme);
+  }, [theme]);
+
+  /* sidebar nav items list */
   const navItems = [
     {
       link: `/`,
@@ -52,15 +74,18 @@ const Sidebar = () => {
       {/* full screen sidebar */}
       <div className={`side-navbar ${isActive && "-translate-x-full"} `}>
         <div>
-          <div className="w-full hidden md:flex py-2 justify-center items-center mx-auto">
-            <h3 className="text-2xl font-bold bg-slate-100 px-4 py-2 rounded-md text-red-500">
-              Todo List
+          <div className="w-full hidden md:flex py-2 justify-center flex-col items-center mx-auto">
+            <h3 className="text-3xl font-bold px-4 py-2 rounded-md text-white">
+              TaskTrek
             </h3>
+            <p className="text-white -mt-2 text-sm">
+              Embark on your task journey
+            </p>
           </div>
 
           <div className="flex flex-col justify-between flex-1 mt-6">
-            <button className="btn btn-sm w-1/2 mx-auto btn-warning my-4">
-              Add Todo <MdFormatListBulletedAdd className="h-5 w-5" />
+            <button className="btn btn-sm w-9/11 mx-auto btn-warning my-4 text-white">
+              Add Task <MdFormatListBulletedAdd className="h-5 w-5" />
             </button>
             <nav>
               {navItems.map((navItem) => (
@@ -71,7 +96,7 @@ const Sidebar = () => {
                     `sidebar ${
                       isActive
                         ? "sidebar-active"
-                        : "text-gray-600 dark:text-white"
+                        : "text-gray-100 dark:text-white"
                     }`
                   }
                 >
@@ -80,6 +105,17 @@ const Sidebar = () => {
                 </NavLink>
               ))}
             </nav>
+          </div>
+
+          {/* theme toggle button */}
+          <div className="flex justify-center items-center mt-16">
+            <button onClick={handleThemeToggle}>
+              {theme == "light" ? (
+                <FiMoon className="w-6 h-6 text-white" />
+              ) : (
+                <FiSun className="w-6 h-6 text-white" />
+              )}
+            </button>
           </div>
         </div>
       </div>

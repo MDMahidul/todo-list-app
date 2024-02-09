@@ -1,9 +1,10 @@
 import React from 'react';
+import PageHeader from '../components/PageHeader';
 
 const AllLists = () => {
     return (
         <div>
-            all lists
+            <PageHeader title={"All Tasks"}/>
         </div>
     );
 };
