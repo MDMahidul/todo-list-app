@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { RiMenuUnfoldLine, RiMenuFoldLine, RiListCheck } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
-import {
-  MdDoneAll,
-  MdRemoveDone,
-  MdFormatListBulletedAdd,
-} from "react-icons/md";
+import { MdDoneAll, MdRemoveDone } from "react-icons/md";
 import { FiMoon, FiSun } from "react-icons/fi";
+import Button from "./Button";
+import { Modal } from "./Modal";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState("false");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   /* Sidebar Responsive Handler */
   const handleToggle = () => {
@@ -30,7 +36,7 @@ const Sidebar = () => {
       document.documentElement.classList.remove("dark");
     }
 
-    localStorage.setItem("theme",theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   /* sidebar nav items list */
@@ -56,7 +62,7 @@ const Sidebar = () => {
       {/* Small Screen Navbar */}
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
         <div>
-          <div className="block cursor-pointer p-4 font-bold">TODO</div>
+          <div className="block cursor-pointer p-4 font-bold">TaskTrek</div>
         </div>
 
         <button
@@ -74,8 +80,8 @@ const Sidebar = () => {
       {/* full screen sidebar */}
       <div className={`side-navbar ${isActive && "-translate-x-full"} `}>
         <div>
-          <div className="w-full hidden md:flex py-2 justify-center flex-col items-center mx-auto">
-            <h3 className="text-3xl font-bold px-4 py-2 rounded-md text-white">
+          <div className="w-full  md:flex py-2 justify-center flex-col items-center mx-auto text-center">
+            <h3 className="text-3xl font-bold px-4 py-2 rounded-md text-white ">
               TaskTrek
             </h3>
             <p className="text-white -mt-2 text-sm">
@@ -84,9 +90,8 @@ const Sidebar = () => {
           </div>
 
           <div className="flex flex-col justify-between flex-1 mt-6">
-            <button className="btn btn-sm w-9/11 mx-auto btn-warning my-4 text-white">
-              Add Task <MdFormatListBulletedAdd className="h-5 w-5" />
-            </button>
+            <Button onClick={()=>setIsModalOpen(true)} lable={"Add Task"} />
+            <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
             <nav>
               {navItems.map((navItem) => (
                 <NavLink
