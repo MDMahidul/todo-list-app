@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RiMenuUnfoldLine, RiMenuFoldLine, RiListCheck } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { MdDoneAll, MdRemoveDone } from "react-icons/md";
 import { FiMoon, FiSun } from "react-icons/fi";
 import Button from "./Button";
 import { Modal } from "./Modal";
+import useTasks from "../hooks/useTasks";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState("false");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { tasks, countTasksByStatus } = useTasks();
 
   /* Sidebar Responsive Handler */
   const handleToggle = () => {
@@ -38,16 +40,19 @@ const Sidebar = () => {
       link: `/`,
       label: "All Todos",
       icons: <RiListCheck className="w-5 h-5" />,
+      count: tasks.length,
     },
     {
       link: `/completed`,
       label: "Completed Lists",
       icons: <MdDoneAll className="w-5 h-5" />,
+      count: countTasksByStatus("completed"),
     },
     {
       link: `/incomplete`,
       label: "Incomplete Lists",
       icons: <MdRemoveDone className="w-5 h-5" />,
+      count: countTasksByStatus("incomplete"),
     },
   ];
   return (
@@ -83,8 +88,8 @@ const Sidebar = () => {
           </div>
 
           <div className="flex flex-col justify-between flex-1 mt-6">
-            {/* <Button onClick={() => setIsModalOpen(true)} lable={"Add Task"} />
-            <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> */}
+            <Button onClick={() => setIsModalOpen(true)} lable={"Add Task"} />
+            <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
             <nav>
               {navItems.map((navItem) => (
                 <NavLink
@@ -99,7 +104,8 @@ const Sidebar = () => {
                   }
                 >
                   {navItem.icons}
-                  <span className="mx-4 font-medium">{navItem.label}</span>
+                    <span className="mx-4 font-medium">{navItem.label}</span>
+                    <span className="font-medium">{navItem.count}</span>
                 </NavLink>
               ))}
             </nav>

@@ -1,24 +1,16 @@
-import React, { useState } from 'react';
 import PageHeader from '../components/PageHeader';
-import Button from '../components/Button';
-import { Modal } from '../components/Modal';
 import SingleTask from './SingleTask';
+import useTasks from '../hooks/useTasks';
 
 const CompletedList = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {filterTasksByStatus}=useTasks();
 
-  /* get data from lg */
-  const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  // Filter completed tasks
-  const completedTasks = allTasks.filter((task) => task.status === "completed");
+  const completedTasks=filterTasksByStatus("completed");
+
   return (
     <div>
       <PageHeader title={"Completed Tasks"} />
-      <div>
-        <Button onClick={() => setIsModalOpen(true)} lable={"Add Task"} />
-        <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      </div>
-      <div>
+      <div className='mt-10'>
         {completedTasks.map((task) => (
           <SingleTask key={task.id} task={task} />
         ))}

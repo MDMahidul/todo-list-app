@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from "uuid";
 import toast from 'react-hot-toast';
+import useTasks from '../hooks/useTasks';
 
 const AddForm = ({ setIsModalOpen }) => {
-  const [tasks, setTasks] = useState([]);
+  //const [tasks, setTasks] = useState([]);
+  const { tasks,updateTasks } = useTasks();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
-  /* update the local storage with new data */
-  useEffect(() => {
-    const prevTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    setTasks(prevTasks);
-  }, []);
 
   const onSubmit = (data) => {
     const taskData = {
@@ -25,9 +20,7 @@ const AddForm = ({ setIsModalOpen }) => {
       status: "incomplete",
       priority: data.priority,
     };
-    const newTasks = [...tasks, taskData];
-    setTasks(newTasks); //added new data with prev data
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
+    updateTasks(taskData);
     toast.success("Task Added Successfully");
     setIsModalOpen(false); //close modal
     reset(); //rest the form

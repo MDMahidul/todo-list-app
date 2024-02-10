@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import Button from "../components/Button";
 import { Modal } from "../components/Modal";
 import SingleTask from "./SingleTask";
+import useTasks from "../hooks/useTasks";
 
 const AllLists = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    /* get data from lg */
-    const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    //console.log(allTasks);
+    const {tasks} = useTasks();
+    //console.log(tasks);
+    
   return (
     <div>
       <PageHeader title={"All Tasks"} />
@@ -18,7 +18,7 @@ const AllLists = () => {
         <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
       <div>
-        {allTasks.map(task=>(<SingleTask key={task.id} task={task}/>))}
+        {tasks.map(task=>(<SingleTask key={task.id} task={task}/>))}
       </div>
     </div>
   );
