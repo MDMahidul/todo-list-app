@@ -9,12 +9,17 @@ import toast from "react-hot-toast";
 
 const SingleTask = ({ task }) => {
   const { id, name, status, priority } = task;
-  const { deleteTask } = useTasks();
+  const { deleteTask, toggleStatus } = useTasks();
 
   /* handle task delete */
   const handleDelete=id=>{
     deleteTask(id);
     toast.success("Task deleted successfully!!!")
+  }
+  /* handle task status toggle */
+  const handleToggleStatus=id=>{
+    toggleStatus(id);
+    //toast.success("Task completed!!!")
   }
 
   /* set color for diff priority */
@@ -31,7 +36,7 @@ const SingleTask = ({ task }) => {
       <div className="flex flex-col text-white">
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center">
-            <button className="mr-2">
+            <button className="mr-2" onClick={()=>handleToggleStatus(id)}>
               <span>
                 {status === "completed" ? (
                   <MdOutlineCheckBox className="h-5 w-5" />

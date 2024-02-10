@@ -38,19 +38,19 @@ const Sidebar = () => {
   const navItems = [
     {
       link: `/`,
-      label: "All Todos",
+      label: "All Tasks",
       icons: <RiListCheck className="w-5 h-5" />,
       count: tasks.length,
     },
     {
       link: `/completed`,
-      label: "Completed Lists",
+      label: "Completed Tasks",
       icons: <MdDoneAll className="w-5 h-5" />,
       count: countTasksByStatus("completed"),
     },
     {
       link: `/incomplete`,
-      label: "Incomplete Lists",
+      label: "Incomplete Tasks",
       icons: <MdRemoveDone className="w-5 h-5" />,
       count: countTasksByStatus("incomplete"),
     },
