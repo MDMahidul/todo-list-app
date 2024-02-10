@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from "uuid";
-import TodoFunc from '../utils/TodoFunc';
 import toast from 'react-hot-toast';
 
 const AddForm = ({ setIsModalOpen }) => {
-  const { addTask } = TodoFunc();
+  const [tasks, setTasks] = useState([]);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const [tasks, setTasks] = useState([]);
 
+  /* update the local storage with new data */
   useEffect(() => {
     const prevTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(prevTasks);
@@ -27,11 +26,11 @@ const AddForm = ({ setIsModalOpen }) => {
       priority: data.priority,
     };
     const newTasks = [...tasks, taskData];
-    setTasks(newTasks);
-    localStorage.setItem("task", JSON.stringify(newTasks));
+    setTasks(newTasks); //added new data with prev data
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
     toast.success("Task Added Successfully");
-    setIsModalOpen(false);
-    reset();
+    setIsModalOpen(false); //close modal
+    reset(); //rest the form
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -9,14 +9,7 @@ import { Modal } from "./Modal";
 const Sidebar = () => {
   const [isActive, setActive] = useState("false");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   /* Sidebar Responsive Handler */
   const handleToggle = () => {
@@ -90,8 +83,8 @@ const Sidebar = () => {
           </div>
 
           <div className="flex flex-col justify-between flex-1 mt-6">
-            <Button onClick={()=>setIsModalOpen(true)} lable={"Add Task"} />
-            <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            {/* <Button onClick={() => setIsModalOpen(true)} lable={"Add Task"} />
+            <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> */}
             <nav>
               {navItems.map((navItem) => (
                 <NavLink
