@@ -60,7 +60,7 @@ const AddForm = ({ setIsModalOpen }) => {
           <option value="high"> High </option>
         </select>
       </div>
-      <button className="btn btn-sm btn-success text-white w-full">
+      <button className="btn bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl border-none text-white w-full">
         Submit
       </button>
     </form>

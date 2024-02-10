@@ -4,9 +4,18 @@ import {
   MdOutlineCheckBoxOutlineBlank,
   MdOutlineCheckBox,
 } from "react-icons/md";
+import useTasks from "../hooks/useTasks";
+import toast from "react-hot-toast";
 
 const SingleTask = ({ task }) => {
   const { id, name, status, priority } = task;
+  const { deleteTask } = useTasks();
+
+  /* handle task delete */
+  const handleDelete=id=>{
+    deleteTask(id);
+    toast.success("Task deleted successfully!!!")
+  }
 
   /* set color for diff priority */
   const priorityBgColors = {
@@ -37,7 +46,7 @@ const SingleTask = ({ task }) => {
             <button>
               <FaRegEdit />
             </button>
-            <button>
+            <button onClick={()=>handleDelete(id)}>
               <FaRegTrashAlt />
             </button>
           </div>

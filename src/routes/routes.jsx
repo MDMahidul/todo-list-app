@@ -3,11 +3,13 @@ import App from "../App";
 import AllLists from "../pages/AllLists";
 import CompletedList from "../pages/CompletedList";
 import IncompleteList from "../pages/IncompleteList";
+import ErrorPage from "../components/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement:<ErrorPage/>,
     children: [
       {
         path: "/",

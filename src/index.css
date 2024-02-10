@@ -14,7 +14,7 @@
   }
 
   .task-input-field {
-    @apply bg-gray-50 border border-green-500 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 focus:outline-none dark:placeholder-gray-400 dark:text-white;
+    @apply bg-gray-50 border border-rose-500 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 focus:outline-none dark:placeholder-gray-400 dark:text-white;
   }
   .task-label {
     @apply block mb-2 text-sm font-medium text-gray-800 dark:text-white;

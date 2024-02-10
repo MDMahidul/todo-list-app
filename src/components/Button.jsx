@@ -1,18 +1,19 @@
-import React from 'react';
-import {MdFormatListBulletedAdd,} from "react-icons/md";
+import React from "react";
+import { MdFormatListBulletedAdd } from "react-icons/md";
 
-const AddButton = ({ lable, onClick }) => {
+const Button = ({ lable, onClick}) => {
   return (
     <div className="text-center">
       <button
         onClick={onClick}
-        className="btn btn-sm mx-auto bg-gradient-to-bl from-blue-400 to-green-500 hover:from-green-400 hover:to-blue-500 border-none my-4 text-white transition-all duration-200 hover:scale-105"
+        className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-5 my-5 focus:border-none hover:shadow-lg"
       >
-        {lable}
-        <MdFormatListBulletedAdd className="h-5 w-5" />
+        <div className="flex justify-center items-center gap-3">
+          {lable}
+        </div>
       </button>
     </div>
   );
 };
 
-export default AddButton;
+export default Button;

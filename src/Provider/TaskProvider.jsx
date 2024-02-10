@@ -18,6 +18,13 @@ const TaskProvider = ({ children }) => {
     setTasks(updatedTasks);
   };
 
+  /* delete data */
+  const deleteTask =(id)=>{
+    const newTaskList = tasks.filter(task=> task.id !== id);
+    localStorage.setItem("tasks", JSON.stringify(newTaskList));
+    setTasks(newTaskList);
+  }
+
   /* get filtred data status wise*/
   const filterTasksByStatus = (status) => {
     return tasks.filter((task) => task.status === status);
@@ -31,7 +38,7 @@ const TaskProvider = ({ children }) => {
 
   return (
     <TaskContext.Provider
-      value={{ tasks, updateTasks, filterTasksByStatus, countTasksByStatus }}
+      value={{ tasks, updateTasks,deleteTask, filterTasksByStatus, countTasksByStatus }}
     >
       {children}
     </TaskContext.Provider>
