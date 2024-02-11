@@ -112,14 +112,15 @@ const Sidebar = () => {
           </div>
 
           {/* theme toggle button */}
-          <div className="flex justify-center items-center mt-16">
+          <div className="flex flex-col justify-center items-center mt-16 gap-1">
             <button onClick={handleThemeToggle}>
               {theme == "light" ? (
                 <FiMoon className="w-6 h-6 text-white" />
-              ) : (
-                <FiSun className="w-6 h-6 text-white" />
-              )}
+                ) : (
+                  <FiSun className="w-6 h-6 text-white" />
+                  )}
             </button>
+                 <p className="text-white font-medium">Theme</p>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const EmptyData = ({text}) => {
     return (
-        <div className='text-center mt-10 text-2xl'>
+        <div className='flex justify-center min-h-[70vh] md:min-h-[60vh] items-center text-gray-400 text-xl md:text-2xl'>
             {text}
         </div>
     );

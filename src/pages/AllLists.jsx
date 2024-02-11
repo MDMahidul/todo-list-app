@@ -15,14 +15,16 @@ const AllLists = () => {
     <div>
       <PageHeader title={"All Tasks"} />
       <div>
-        <Button onClick={() => setIsModalOpen(true)} lable={"Add Task"}/>
+        <Button onClick={() => setIsModalOpen(true)} lable={"Add Task"} />
         <Modal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
       <div>
         {tasks.length == 0 ? (
-          <EmptyData text={"No task found"}/>
+          <EmptyData text={"No task available"} />
         ) : (
-          tasks.map((task) => <SingleTask key={task.id} task={task} />)
+          tasks.map((task, index) => (
+            <SingleTask key={task.id} task={task} index={index} />
+          ))
         )}
       </div>
     </div>

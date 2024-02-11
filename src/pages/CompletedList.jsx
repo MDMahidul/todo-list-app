@@ -15,7 +15,9 @@ const CompletedList = () => {
         {completedTasks.length == 0 ? (
           <EmptyData text={"No completed task found"} />
         ) : (
-          completedTasks.map((task) => <SingleTask key={task.id} task={task} />)
+          completedTasks.map((task, index) => (
+            <SingleTask key={task.id} task={task} index={index} />
+          ))
         )}
       </div>
     </div>

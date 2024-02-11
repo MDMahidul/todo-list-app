@@ -30,7 +30,7 @@ const TaskProvider = ({ children }) => {
     const selectedTask = tasks.find((task) => task.id === id);
     if (selectedTask) {
       selectedTask.status =
-        selectedTask.status === "completed" ? "incomplete" : "complete";
+        selectedTask.status === "completed" ? "incomplete" : "completed";
 
       const updatedTasks = tasks.map((task) =>
         task.id === id ? selectedTask : task

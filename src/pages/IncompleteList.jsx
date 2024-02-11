@@ -13,8 +13,8 @@ const IncompleteList = () => {
         {incompleteTasks.length == 0 ? (
           <EmptyData text={"No incomplete task found"} />
         ) : (
-          incompleteTasks.map((task) => (
-            <SingleTask key={task.id} task={task} />
+          incompleteTasks.map((task, index) => (
+            <SingleTask key={task.id} task={task} index={index} />
           ))
         )}
       </div>
