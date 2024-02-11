@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import useTasks from "../../hooks/useTasks";
+import { useNavigate } from "react-router-dom";
 
 const AddForm = ({ setIsModalOpen }) => {
   //const [tasks, setTasks] = useState([]);
   const { tasks, addTask } = useTasks();
+  const navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,6 +25,8 @@ const AddForm = ({ setIsModalOpen }) => {
     addTask(taskData);
     toast.success("Task Added Successfully");
     setIsModalOpen(false); //close modal
+    /* redirect to all task data after add new task */
+    navigate('/');
     reset(); //rest the form
   };
   return (
