@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import {
   MdOutlineCheckBoxOutlineBlank,
@@ -6,10 +6,12 @@ import {
 } from "react-icons/md";
 import useTasks from "../hooks/useTasks";
 import toast from "react-hot-toast";
+import { UpdateModal } from "../components/Modal/UpdateModal";
 
 const SingleTask = ({ task }) => {
   const { id, name, status, priority } = task;
   const { deleteTask, toggleStatus } = useTasks();
+   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /* handle task delete */
   const handleDelete=id=>{
@@ -36,7 +38,7 @@ const SingleTask = ({ task }) => {
       <div className="flex flex-col text-white">
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center">
-            <button className="mr-2" onClick={()=>handleToggleStatus(id)}>
+            <button className="mr-2" onClick={() => handleToggleStatus(id)}>
               <span>
                 {status === "completed" ? (
                   <MdOutlineCheckBox className="h-5 w-5" />
@@ -48,10 +50,11 @@ const SingleTask = ({ task }) => {
             <p className="font-semibold  text-xl mt-[-3px]">{name}</p>
           </div>
           <div className="flex gap-3 ml-5">
-            <button>
+            <button onClick={() => setIsModalOpen(true)}>
               <FaRegEdit />
             </button>
-            <button onClick={()=>handleDelete(id)}>
+            <UpdateModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} task={task}/>
+            <button onClick={() => handleDelete(id)}>
               <FaRegTrashAlt />
             </button>
           </div>

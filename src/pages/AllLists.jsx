@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import Button from "../components/Button";
-import { Modal } from "../components/Modal";
 import SingleTask from "./SingleTask";
 import useTasks from "../hooks/useTasks";
 import EmptyData from "../components/EmptyData";
+import { Modal } from "../components/Modal/Modal";
 
 const AllLists = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

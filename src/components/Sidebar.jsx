@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 import { MdDoneAll, MdRemoveDone } from "react-icons/md";
 import { FiMoon, FiSun } from "react-icons/fi";
 import Button from "./Button";
-import { Modal } from "./Modal";
 import useTasks from "../hooks/useTasks";
+import { Modal } from "./Modal/Modal";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState("false");

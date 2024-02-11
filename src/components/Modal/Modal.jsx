@@ -1,6 +1,6 @@
 import { Fragment} from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import AddForm from "./AddForm";
+import AddForm from "../Form/AddForm";
 
 export const Modal = ({ setIsModalOpen, isOpen }) => {
 

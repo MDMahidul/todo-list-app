@@ -1,11 +1,11 @@
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import toast from 'react-hot-toast';
-import useTasks from '../hooks/useTasks';
+import toast from "react-hot-toast";
+import useTasks from "../../hooks/useTasks";
 
 const AddForm = ({ setIsModalOpen }) => {
   //const [tasks, setTasks] = useState([]);
-  const { tasks,updateTasks } = useTasks();
+  const { tasks, addTask } = useTasks();
   const {
     register,
     handleSubmit,
@@ -20,7 +20,7 @@ const AddForm = ({ setIsModalOpen }) => {
       status: "incomplete",
       priority: data.priority,
     };
-    updateTasks(taskData);
+    addTask(taskData);
     toast.success("Task Added Successfully");
     setIsModalOpen(false); //close modal
     reset(); //rest the form

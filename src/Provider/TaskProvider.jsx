@@ -12,7 +12,7 @@ const TaskProvider = ({ children }) => {
   }, []);
 
   /* add data */
-  const updateTasks = (newTask) => {
+  const addTask = (newTask) => {
     const updatedTasks = [...tasks, newTask];
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setTasks(updatedTasks);
@@ -27,17 +27,34 @@ const TaskProvider = ({ children }) => {
 
   /* toggle the task status*/
   const toggleStatus = (id) => {
-    /* find the id */
     const selectedTask = tasks.find((task) => task.id === id);
     if (selectedTask) {
-      /* update the task status */
-      selectedTask.status = selectedTask.status === "completed" ? "incomplete" : "completed";
+      selectedTask.status =
+        selectedTask.status === "completed" ? "incomplete" : "complete";
 
-      /* update new task data with the old one */
       const updatedTasks = tasks.map((task) =>
         task.id === id ? selectedTask : task
       );
+      // Update tasks with the updated task list
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      setTasks(updatedTasks);
+    }
+  };
 
+  /* update task data */
+  const updateTask = (id, newData) => {
+    const selectedTask = tasks.find((task) => task.id === id);
+
+    if (selectedTask) {
+      // Merge the new data with the existing task data
+      const updatedTask = { ...selectedTask, ...newData };
+
+      // Update the tasks array with the updated task
+      const updatedTasks = tasks.map((task) =>
+        task.id === id ? updatedTask : task
+      );
+
+      // Update localStorage and state
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       setTasks(updatedTasks);
     }
@@ -57,11 +74,12 @@ const TaskProvider = ({ children }) => {
     <TaskContext.Provider
       value={{
         tasks,
-        updateTasks,
+        addTask,
         deleteTask,
         filterTasksByStatus,
         countTasksByStatus,
         toggleStatus,
+        updateTask,
       }}
     >
       {children}
